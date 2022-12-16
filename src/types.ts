@@ -26,12 +26,7 @@ export const Variant = zod.object({
 	QUAL: zod.number().or(zod.literal(null)),
 
 	// // Samples is either an object with a getter, or with value of samples. this accomplishes lazy loading
-	SAMPLES: zod.object({
-		value: zod.record(zod.string(), zod.any()).optional(),
-		// 	// get: zod.function().returns(VariantSamplesValue),
-		configurable: zod.boolean().optional(), //zod.literal(false),
-	}),
-	// .or(VariantSamples),
+	SAMPLES: zod.record(zod.string(), zod.any()),
 });
 
 export type Variant = zod.infer<typeof Variant>;
