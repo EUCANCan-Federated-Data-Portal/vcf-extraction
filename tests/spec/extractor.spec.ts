@@ -13,6 +13,7 @@ describe('Extractor', () => {
 			let count = 0;
 			const variantGenerator = exporter.getVariants(twoVariantVcf);
 			for await (const result of variantGenerator) {
+				console.log(JSON.stringify(result));
 				count++;
 				expect(result).to.be.a('object');
 				expect(result.success).to.be.true;

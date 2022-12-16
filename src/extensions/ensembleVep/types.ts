@@ -46,31 +46,32 @@ export type Annotation = {
 	uniparc?: string;
 	uniprotkb_swissprot?: string;
 	uniprotkb_trembl?: string;
+	variant_class?: string;
 	vep_impact?: string;
 };
 export type Frequency = {
 	'1000_genomes': {
-		af?: string;
-		afr_af?: string;
-		amr_af?: string;
-		eas_af?: string;
-		eur_af?: string;
-		sas_af?: string;
+		af?: number;
+		afr_af?: number;
+		amr_af?: number;
+		eas_af?: number;
+		eur_af?: number;
+		sas_af?: number;
 	};
 	esp: {
-		aa_af?: string;
-		ea_af?: string;
+		aa_af?: number;
+		ea_af?: number;
 	};
 	gnomad_exomes: {
-		af?: string;
-		afr_af?: string;
-		amr_af?: string;
-		asj_af?: string;
-		eas_af?: string;
-		fin_af?: string;
-		nfe_af?: string;
-		oth_af?: string;
-		sas_af?: string;
+		af?: number;
+		afr_af?: number;
+		amr_af?: number;
+		asj_af?: number;
+		eas_af?: number;
+		fin_af?: number;
+		nfe_af?: number;
+		oth_af?: number;
+		sas_af?: number;
 	};
 	// max_af: '';
 	// max_af_pop: '';

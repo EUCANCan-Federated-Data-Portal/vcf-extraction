@@ -161,6 +161,7 @@ const buildAnnotation =
 				uniparc: emptyToUndefined(propertyFinder('UNIPARC')),
 				uniprotkb_swissprot: emptyToUndefined(propertyFinder('SWISSPROT')),
 				uniprotkb_trembl: emptyToUndefined(propertyFinder('TREMBL')),
+				variant_class: emptyToUndefined(propertyFinder('VARIANT_CLASS')),
 				vep_impact: emptyToUndefined(propertyFinder('IMPACT')),
 				transcription_factors: propertyFinder('TRANSCRIPTION_FACTORS').split('&').filter(isNotEmpty),
 			};
@@ -177,27 +178,27 @@ const buildFrequency =
 		const propertyFinder = getCsqProperty(headerIndexMap, fields);
 		const output: Frequency = {
 			'1000_genomes': {
-				af: emptyToUndefined(propertyFinder('AF')),
-				afr_af: emptyToUndefined(propertyFinder('AFR_AF')),
-				amr_af: emptyToUndefined(propertyFinder('AMR_AF')),
-				eas_af: emptyToUndefined(propertyFinder('EAS_AF')),
-				eur_af: emptyToUndefined(propertyFinder('EUR_AF')),
-				sas_af: emptyToUndefined(propertyFinder('SAS_AF')),
+				af: safeParseFloat(propertyFinder('AF')),
+				afr_af: safeParseFloat(propertyFinder('AFR_AF')),
+				amr_af: safeParseFloat(propertyFinder('AMR_AF')),
+				eas_af: safeParseFloat(propertyFinder('EAS_AF')),
+				eur_af: safeParseFloat(propertyFinder('EUR_AF')),
+				sas_af: safeParseFloat(propertyFinder('SAS_AF')),
 			},
 			esp: {
-				aa_af: emptyToUndefined(propertyFinder('AA_AF')),
-				ea_af: emptyToUndefined(propertyFinder('EA_AF')),
+				aa_af: safeParseFloat(propertyFinder('AA_AF')),
+				ea_af: safeParseFloat(propertyFinder('EA_AF')),
 			},
 			gnomad_exomes: {
-				af: emptyToUndefined(propertyFinder('gnomAD_AF')),
-				afr_af: emptyToUndefined(propertyFinder('gnomAD_AFR_AF')),
-				amr_af: emptyToUndefined(propertyFinder('gnomAD_AMR_AF')),
-				asj_af: emptyToUndefined(propertyFinder('gnomAD_ASJ_AF')),
-				eas_af: emptyToUndefined(propertyFinder('gnomAD_EAS_AF')),
-				fin_af: emptyToUndefined(propertyFinder('gnomAD_FIN_AF')),
-				nfe_af: emptyToUndefined(propertyFinder('gnomAD_NFE_AF')),
-				oth_af: emptyToUndefined(propertyFinder('gnomAD_OTH_AF')),
-				sas_af: emptyToUndefined(propertyFinder('gnomAD_SAS_AF')),
+				af: safeParseFloat(propertyFinder('gnomAD_AF')),
+				afr_af: safeParseFloat(propertyFinder('gnomAD_AFR_AF')),
+				amr_af: safeParseFloat(propertyFinder('gnomAD_AMR_AF')),
+				asj_af: safeParseFloat(propertyFinder('gnomAD_ASJ_AF')),
+				eas_af: safeParseFloat(propertyFinder('gnomAD_EAS_AF')),
+				fin_af: safeParseFloat(propertyFinder('gnomAD_FIN_AF')),
+				nfe_af: safeParseFloat(propertyFinder('gnomAD_NFE_AF')),
+				oth_af: safeParseFloat(propertyFinder('gnomAD_OTH_AF')),
+				sas_af: safeParseFloat(propertyFinder('gnomAD_SAS_AF')),
 			},
 			// max_af: '';
 			// max_af_pop: '';
