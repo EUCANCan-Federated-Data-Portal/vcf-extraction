@@ -1,7 +1,7 @@
 import VCF from '@gmod/vcf';
 import readline from 'readline';
-import { Readable } from 'stream';
 import { AnnotationExtension, Either, success, Variant } from './types';
+import { stringToStream } from './utils/stringUtils';
 
 class VcfExtractor<AnnotationData = {}> {
 	annotation?: AnnotationExtension<AnnotationData>;
@@ -9,16 +9,15 @@ class VcfExtractor<AnnotationData = {}> {
 		this.annotation = annotation;
 	}
 
-	async *getVariants(vcf: string): AsyncGenerator<Either<Variant & AnnotationData, Variant>> {
-		const stream = new Readable();
-		stream.push(vcf);
-		stream.push(null); // end stream
-		for await (const variant of this.streamVariants(stream)) {
-			yield variant;
-		}
-	}
+	/**
+	 * Returns an async generator of Variants from the VCF file
+	 * @param vcf VCF File provided as a ReadableStream or a String
+	 */
+	async *generateVariants(
+		vcf: NodeJS.ReadableStream | String,
+	): AsyncGenerator<Either<Variant & AnnotationData, Variant>> {
+		let vcfStream = typeof vcf === 'string' ? stringToStream(vcf) : (vcf as NodeJS.ReadableStream);
 
-	async *streamVariants(vcf: NodeJS.ReadableStream): AsyncGenerator<Either<Variant & AnnotationData, Variant>> {
 		let parser: VCF;
 		const header: string[] = [];
 		const outputs: Either<Variant & AnnotationData, Variant>[] = [];
@@ -30,14 +29,16 @@ class VcfExtractor<AnnotationData = {}> {
 
 		const _this = this;
 
-		const rl = readline.createInterface({ input: vcf });
+		const rl = readline.createInterface({ input: vcfStream });
 		rl.on('line', function (line): void {
 			try {
 				if (line.startsWith('#')) {
 					header.push(line);
 					return;
 				}
-				parser = new VCF({ header: header.join('\n') });
+				if (parser === undefined) {
+					parser = new VCF({ header: header.join('\n') });
+				}
 
 				const variant = Variant.parse(parser.parseLine(line));
 
@@ -72,6 +73,7 @@ class VcfExtractor<AnnotationData = {}> {
 		while (!done) {
 			await promise;
 			if (errors.length) {
+				console.log(errors);
 				throw errors[0];
 			}
 			while (outputs.length) {

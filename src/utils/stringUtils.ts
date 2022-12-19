@@ -1,3 +1,5 @@
+import { Readable } from 'stream';
+
 /**
  * Return undefined in place of an empty string, otherwise the original value
  * @param value
@@ -41,4 +43,11 @@ export const safeParseFloat = (value?: string): number | undefined => {
 
 	const num = parseFloat(value);
 	return num;
+};
+
+export const stringToStream = (vcf: string): NodeJS.ReadableStream => {
+	const stream = new Readable();
+	stream.push(vcf);
+	stream.push(null); // end stream
+	return stream;
 };
