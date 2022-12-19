@@ -20,7 +20,7 @@ Standard VCF data extraction only, no annotation processing.
 ```ts
 import VcfExtractor from 'vcf-extractor';
 
-async function example(processVariant: (v: Varaint) => any): void {
+async function example(processVariant: (v: Variant) => any): void {
 
 	// Initialize Extractor with no annotation extension
 	const extractor = new VcfExtractor();
@@ -41,7 +41,9 @@ async function example(processVariant: (v: Varaint) => any): void {
 
 This library has one built in Extension available out of the box, with the potential to add more later. This extension will parse EnsembleVEP annotations and add these to the returned Variant object.
 
-The annotation data is typed as defined by `VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`, and when this extensionis used, the extracted variants will have the interseciton type `Varaint & VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`;
+The annotation data is typed as defined by `VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`, and when this extensionis used, the extracted variants will have the interseciton type:
+
+`Variant & VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`
 
 To use this extension, initialize the extractor with the extension provided:
 
@@ -55,7 +57,7 @@ A full example extracting variants this way and then passing them to another ext
 ```ts
 import VcfExtractor, { VcfExtensions } from 'vcf-extractor';
 
-type AnnotatedVariant = Varaint & VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation;
+type AnnotatedVariant = Variant & VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation;
 
 async function example(processVariant: (v: AnnotatedVariant) => any): void {
 
