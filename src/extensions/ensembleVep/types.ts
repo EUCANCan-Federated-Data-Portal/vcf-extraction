@@ -76,6 +76,7 @@ export type Frequency = {
 	// max_af: '';
 	// max_af_pop: '';
 };
+export type EnsembleVepAnnotation = { annotations: Annotation[]; frequencies: Frequency[] };
 
 // type Observation = {
 // 	read_depth: {

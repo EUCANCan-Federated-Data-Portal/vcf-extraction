@@ -1,6 +1,6 @@
 import VcfExtractor from './extractor';
 export default VcfExtractor;
 
-export * from './extensions';
+export * as VcfExtensions from './extensions';
 
 export * from './types';

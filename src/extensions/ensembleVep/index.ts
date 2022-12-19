@@ -1,6 +1,6 @@
 import { fallback, AnnotationExtension, failure, Result, success, Variant, Success } from '../../types';
 import { emptyToUndefined, safeParseFloat, safeParseInt } from '../../utils/stringUtils';
-import { Annotation, Frequency } from './types';
+import { Annotation, EnsembleVepAnnotation, Frequency } from './types';
 import { isNotEmpty } from './utils';
 
 const BOOLEAN_TRUE_STRING = 'YES';
@@ -230,10 +230,9 @@ const buildFrequency =
 /* ********************************* *
  * Ensemble VEP Annotation Extension *
  * ********************************* */
-export type EnsembleVepAnnotation = { annotations: Annotation[]; frequencies: Frequency[] };
-
 /**
  * Adds mutation consequence and frequency data to a variant based on Ensemble VEP annotations
+ * Details on the Ensemble VEP Annotations and how they are generated can be referenced here: https://useast.ensembl.org/info/docs/tools/vep/script/vep_custom.html
  * @param data
  * @returns
  */

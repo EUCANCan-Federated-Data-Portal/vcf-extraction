@@ -6,7 +6,7 @@ import { parsers } from '../../../setup/parser';
 import { variants } from '../../../setup/variants';
 
 import ensembleVepParser from '../../../../src/extensions/ensembleVep';
-import { Annotation, Frequency } from '../../../../src';
+import { Annotation, Frequency } from '../../../../src/extensions/ensembleVep/types';
 
 let parser: VCF;
 let annotatedVariant = variants.annotated.ensembleVep;
@@ -116,32 +116,32 @@ describe('Extension - EnsembleVEP', () => {
 
 		expect(extendedVariant.success).to.be.true;
 
-		// const expected = {
-		// 	'1000_genomes': {
-		// 		af: '4.78E-05',
-		// 		afr_af: 'afr-af',
-		// 		amr_af: 'amr-af',
-		// 		eas_af: 'eas-af',
-		// 		eur_af: 'eur-af',
-		// 		sas_af: 'sas-af',
-		// 	},
-		// 	esp: { aa_af: 'aa-af', ea_af: 'ea-af' },
-		// 	gnomad_exomes: {
-		// 		af: 'gnom-ad-af',
-		// 		afr_af: 'gnom-ad-afr-af',
-		// 		amr_af: 'gnom-ad-amr-af',
-		// 		asj_af: 'gnom-ad-asj-af',
-		// 		eas_af: 'gnom-ad-eas-af',
-		// 		fin_af: 'gnom-ad-fin-af',
-		// 		nfe_af: 'gnom-ad-nfe-af',
-		// 		oth_af: 'gnom-ad-oth-af',
-		// 		sas_af: 'gnom-ad-sas-af',
-		// 	},
-		// } satisfies Frequency;
+		const expected = {
+			'1000_genomes': {
+				af: 0.0000478,
+				afr_af: 0.0000578,
+				amr_af: 0.00123,
+				eas_af: 9.87e-8,
+				eur_af: 12.3,
+				sas_af: 0.0000345,
+			},
+			esp: { aa_af: 0.0000456, ea_af: 0.0000567 },
+			gnomad_exomes: {
+				af: 0.0000678,
+				afr_af: 0.0000789,
+				amr_af: 0.000891,
+				asj_af: 0.000912,
+				eas_af: 0.000123,
+				fin_af: 0.000234,
+				nfe_af: 0.000345,
+				oth_af: 0.000456,
+				sas_af: 0.000567,
+			},
+		} satisfies Frequency;
 
-		// expect(extendedVariant.success && extendedVariant.data.frequencies[0]).to.deep.equal(expected);
-		console.log(extendedVariant.success && JSON.stringify(extendedVariant.data.frequencies[0]));
+		expect(extendedVariant.success && extendedVariant.data.frequencies[0]).to.deep.equal(expected);
 	});
+
 	it('annotated variants must parse empty values correctly', () => {
 		// Second CSQ value in the provided example has many empty fields
 		const extendedVariant = ensembleVepParser({ variant: annotatedVariant, parser });
