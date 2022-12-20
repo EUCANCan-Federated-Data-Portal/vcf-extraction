@@ -107,8 +107,7 @@ describe('Extension - EnsembleVEP', () => {
 			],
 		} satisfies Annotation;
 
-		// expect(extendedVariant.success && extendedVariant.data.annotations[0]).to.deep.equal(expected);
-		console.log(extendedVariant.success && JSON.stringify(extendedVariant.data.annotations[0]));
+		expect(extendedVariant.success && extendedVariant.data.annotations[0]).to.deep.equal(expected);
 	});
 
 	it('annotated variants must have correct frequency values', () => {

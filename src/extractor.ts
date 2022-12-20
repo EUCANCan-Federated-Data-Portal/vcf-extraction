@@ -73,7 +73,6 @@ class VcfExtractor<AnnotationData = {}> {
 		while (!done) {
 			await promise;
 			if (errors.length) {
-				console.log(errors);
 				throw errors[0];
 			}
 			while (outputs.length) {
