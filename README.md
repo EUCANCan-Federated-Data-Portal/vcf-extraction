@@ -30,7 +30,7 @@ async function example(processVariant: (v: Variant) => any): void {
 	const vcf = await fetchVcf(); 
 	
 	// Iterate through all variants in stream
-	for await (const variant of extractor.streamVariants(vcf)) {
+	for await (const variant of extractor.generateVariants(vcf)) {
 		// Process each variant from the VCF, one at a time
 		processVariant(variant);
 	}
