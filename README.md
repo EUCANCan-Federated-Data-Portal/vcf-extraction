@@ -39,9 +39,9 @@ async function example(processVariant: (v: Variant) => any): void {
 
 ### Extended VCF Extractor with EnsembleVEP Annotations
 
-This library has one built in Extension available out of the box, with the potential to add more later. This extension will parse EnsembleVEP annotations and add these to the returned Variant object.
+This library has one built in Extension available out of the box, with the potential to add more later. This extension will parse [EnsembleVEP](https://useast.ensembl.org/info/docs/tools/vep/index.html) annotations and add these to the returned Variant object.
 
-The annotation data is typed as defined by `VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`, and when this extensionis used, the extracted variants will have the interseciton type:
+The annotation data is typed as defined by `VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`. When this extensionis used, the extracted variants will have the interseciton type:
 
 `Variant & VcfExtensions.EnsembleVepTypes.EnsembleVepAnnotation`
 
