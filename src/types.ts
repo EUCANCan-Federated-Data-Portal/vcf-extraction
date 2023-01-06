@@ -19,7 +19,9 @@ export const Variant = zod.object({
 	CHROM: zod.string(),
 	POS: zod.number(),
 	ALT: zod.array(zod.string().or(zod.literal(null))).or(zod.literal(null)),
-	INFO: zod.record(zod.string(), zod.array(zod.string().or(zod.number()).or(zod.literal(null)))).optional(),
+	INFO: zod
+		.record(zod.string(), zod.boolean().or(zod.array(zod.string().or(zod.number()).or(zod.literal(null)))))
+		.optional(),
 	REF: zod.string(),
 	FILTER: zod.string().or(zod.array(zod.string())).or(zod.literal(null)),
 	ID: zod.array(zod.string()).or(zod.literal(null)),
